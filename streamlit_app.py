@@ -920,7 +920,7 @@ Technical Details:
         "💡 **Tip:** Adjust the cable specifications in the sidebar and click 'Calculate Cable Weight' to see updated results."
     )
     st.markdown(
-        "⚠️ **Note:** This calculator is for engineering estimation purposes. Always verify results with detailed engineering analysis."
+        "⚠️ **Note:** This calculator is for engineering estimation purposes. Always verify results with detailed engineering analysis from cable supplier specsheet."
     )
 
 
