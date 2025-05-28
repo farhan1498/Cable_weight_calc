@@ -711,17 +711,27 @@ def main():
             except Exception as e:
                 st.error(f"❌ Error in calculation: {str(e)}")
 
+
     with col2:
         st.header("💾 Presets")
-        
+
         if st.button("📁 Load Default Values"):
-            st.session_state.specs = CableSpecs()
+            # Reset to default values by creating new CableSpecs instance
+            default_specs = CableSpecs()
+            # Update session state with default values
+            st.session_state.specs = default_specs
+            st.success("✅ Default values loaded!")
             st.rerun()
-        
+
         if st.button("🗑️ Clear All Fields"):
-            for key in st.session_state.keys():
-                if key.startswith('specs'):
-                    del st.session_state[key]
+            # Clear results from session state
+            if 'results' in st.session_state:
+                del st.session_state['results']
+            if 'calculator' in st.session_state:
+                del st.session_state['calculator']
+            # Reset specs to default (which effectively clears to initial state)
+            st.session_state.specs = CableSpecs()
+            st.success("✅ All fields cleared!")
             st.rerun()
 
     # Display results if available
