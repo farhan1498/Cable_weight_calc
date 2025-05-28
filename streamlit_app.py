@@ -140,7 +140,7 @@ class CableWeightCalculator:
     def calculate_conductor_waterblock(self) -> Dict:
         """Calculate conductor waterblocking material weight"""
         density = self._material_data["Conductor Strandblock Water Blocking Material"]["density_air"]
-        radius = (self.specs.inner_semicon_od_mm - 2*self.specs.inner_semicon_thickness_mm) / 2
+        radius = (self.specs.inner_semicon_od_mm - 2 * self.specs.inner_semicon_thickness_mm) / 2
         vol_est = (math.pi * radius ** 2) - self.specs.conductor_size_mm2
         weight = vol_est * density * 1e-6
 
@@ -468,192 +468,192 @@ def main():
     with st.sidebar:
         st.subheader("🔌 Conductor Specifications")
         conductor_size = st.number_input(
-            "Conductor Size (mm²)", 
-            min_value=0.0, 
+            "Conductor Size (mm²)",
+            min_value=0.0,
             value=float(st.session_state.specs.conductor_size_mm2),
             step=50.0
         )
         conductor_material = st.selectbox(
-            "Conductor Material", 
-            ["Al", "Cu"], 
+            "Conductor Material",
+            ["Al", "Cu"],
             index=0 if st.session_state.specs.conductor_material == "Al" else 1
         )
 
         st.subheader("📏 Layer Dimensions (mm)")
         inner_semicon_od = st.number_input(
-            "Inner Semicon OD", 
-            min_value=0.0, 
+            "Inner Semicon OD",
+            min_value=0.0,
             value=float(st.session_state.specs.inner_semicon_od_mm),
             step=1.0
         )
         inner_semicon_thickness = st.number_input(
-            "Inner Semicon Thickness", 
-            min_value=0.0, 
+            "Inner Semicon Thickness",
+            min_value=0.0,
             value=float(st.session_state.specs.inner_semicon_thickness_mm),
             step=0.1
         )
         xlpe_od = st.number_input(
-            "XLPE OD", 
-            min_value=0.0, 
+            "XLPE OD",
+            min_value=0.0,
             value=float(st.session_state.specs.xlpe_od_mm),
             step=1.0
         )
         outer_semicon_od = st.number_input(
-            "Outer Semicon OD", 
-            min_value=0.0, 
+            "Outer Semicon OD",
+            min_value=0.0,
             value=float(st.session_state.specs.outer_semicon_od_mm),
             step=1.0
         )
         water_block_tape_thickness = st.number_input(
-            "Water Block Tape Thickness", 
-            min_value=0.0, 
+            "Water Block Tape Thickness",
+            min_value=0.0,
             value=float(st.session_state.specs.water_block_tape_thickness_mm),
             step=0.1
         )
         water_block_tape_od = st.number_input(
-            "Water Block Tape OD", 
-            min_value=0.0, 
+            "Water Block Tape OD",
+            min_value=0.0,
             value=float(st.session_state.specs.water_block_tape_od_mm),
             step=1.0
         )
         copper_screen_size = st.number_input(
-            "Copper Screen Size (mm²)", 
-            min_value=0.0, 
+            "Copper Screen Size (mm²)",
+            min_value=0.0,
             value=float(st.session_state.specs.copper_screen_size_mm2),
             step=10.0
         )
         lead_sheath_thickness = st.number_input(
-            "Lead Sheath Thickness", 
-            min_value=0.0, 
+            "Lead Sheath Thickness",
+            min_value=0.0,
             value=float(st.session_state.specs.lead_sheath_thickness_mm),
             step=0.1
         )
         lead_sheath_od = st.number_input(
-            "Lead Sheath OD", 
-            min_value=0.0, 
+            "Lead Sheath OD",
+            min_value=0.0,
             value=float(st.session_state.specs.lead_sheath_od_mm),
             step=1.0
         )
         pe_sheath_thickness = st.number_input(
-            "PE Sheath Thickness", 
-            min_value=0.0, 
+            "PE Sheath Thickness",
+            min_value=0.0,
             value=float(st.session_state.specs.pe_sheath_thickness_mm),
             step=0.1
         )
         od_power_core = st.number_input(
-            "Power Core OD", 
-            min_value=0.0, 
+            "Power Core OD",
+            min_value=0.0,
             value=float(st.session_state.specs.od_power_core_mm),
             step=1.0
         )
 
         st.subheader("🔧 Cable Assembly")
         lay_length = st.number_input(
-            "Lay Length (mm)", 
-            min_value=0.0, 
+            "Lay Length (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.lay_length_mm),
             step=100.0
         )
 
         st.subheader("🌐 FOC Specifications")
         od_foc = st.number_input(
-            "FOC OD (mm)", 
-            min_value=0.0, 
+            "FOC OD (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.od_foc_mm),
             step=1.0
         )
         weight_single_foc = st.number_input(
-            "Single FOC Weight (kg/m)", 
-            min_value=0.0, 
+            "Single FOC Weight (kg/m)",
+            min_value=0.0,
             value=float(st.session_state.specs.weight_single_foc_kg_per_m),
             step=0.01
         )
         num_focs = st.number_input(
-            "Number of FOCs", 
-            min_value=0, 
+            "Number of FOCs",
+            min_value=0,
             value=int(st.session_state.specs.num_focs),
             step=1
         )
 
         st.subheader("🔩 Assembly & Filler")
         assembled_od = st.number_input(
-            "Assembled OD (mm)", 
-            min_value=0.0, 
+            "Assembled OD (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.assembled_od_mm),
             step=1.0
         )
         filler_coverage = st.slider(
-            "Filler Coverage (%)", 
-            min_value=0.0, 
-            max_value=1.0, 
+            "Filler Coverage (%)",
+            min_value=0.0,
+            max_value=1.0,
             value=float(st.session_state.specs.filler_coverage_percent),
             step=0.05
         )
         filler_material = st.selectbox(
-            "Filler Material", 
+            "Filler Material",
             ["Filler_PVC", "Filler_MDPE", "Filler_SC PE"],
             index=0
         )
 
         st.subheader("🛡️ Bedding & Armor")
         bedding_od = st.number_input(
-            "Bedding OD (mm)", 
-            min_value=0.0, 
+            "Bedding OD (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.bedding_od_mm),
             step=1.0
         )
         bedding_thickness = st.number_input(
-            "Bedding Thickness (mm)", 
-            min_value=0.0, 
+            "Bedding Thickness (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.bedding_thickness_mm),
             step=0.1
         )
         num_steel_wires = st.number_input(
-            "Number of Steel Wires", 
-            min_value=0, 
+            "Number of Steel Wires",
+            min_value=0,
             value=int(st.session_state.specs.num_steel_wires),
             step=1
         )
         num_pe_wires = st.number_input(
-            "Number of PE Wires", 
-            min_value=0, 
+            "Number of PE Wires",
+            min_value=0,
             value=int(st.session_state.specs.num_pe_wires),
             step=1
         )
         wire_diameter = st.number_input(
-            "Wire Diameter (mm)", 
-            min_value=0.0, 
+            "Wire Diameter (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.wire_diameter_mm),
             step=0.1
         )
         armor_lay_length = st.number_input(
-            "Armor Lay Length (mm)", 
-            min_value=0.0, 
+            "Armor Lay Length (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.armor_lay_length_mm),
             step=100.0
         )
         steel_type = st.selectbox(
-            "Steel Type", 
-            ["GS", "SS"], 
+            "Steel Type",
+            ["GS", "SS"],
             index=0 if st.session_state.specs.steel_type == "GS" else 1
         )
 
         st.subheader("🔒 Outer Protection")
         outer_od = st.number_input(
-            "Outer OD (mm)", 
-            min_value=0.0, 
+            "Outer OD (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.outer_od_mm),
             step=1.0
         )
         outer_thickness = st.number_input(
-            "Outer Thickness (mm)", 
-            min_value=0.0, 
+            "Outer Thickness (mm)",
+            min_value=0.0,
             value=float(st.session_state.specs.outer_thickness_mm),
             step=0.1
         )
         design_type = st.selectbox(
-            "Design Type", 
-            ["ROVED", "SHEATHED"], 
+            "Design Type",
+            ["ROVED", "SHEATHED"],
             index=0 if st.session_state.specs.design_type == "ROVED" else 1
         )
 
@@ -696,58 +696,57 @@ def main():
 
     with col1:
         st.header("📊 Calculation Results")
-        
+
         if st.button("🔄 Calculate Cable Weight", type="primary"):
             try:
                 calculator = CableWeightCalculator(specs, show_breakdown=True)
                 results = calculator.calculate_total_weight()
-                
+
                 # Store results in session state
                 st.session_state.results = results
                 st.session_state.calculator = calculator
-                
+
                 st.success("✅ Calculation completed successfully!")
-                
+
             except Exception as e:
                 st.error(f"❌ Error in calculation: {str(e)}")
 
+    with col2:
+        st.header("💾 Presets")
 
-        with col2:
-            st.header("💾 Presets")
+        if st.button("📁 Load Default Values"):
+            st.session_state.specs = CableSpecs()
+            st.rerun()
 
-            if st.button("📁 Load Default Values"):
-                st.session_state.specs = CableSpecs()
-                st.rerun()
-
-            if st.button("🗑️ Clear All Fields"):
-                for key in st.session_state.keys():
-                    if key.startswith('specs'):
-                        del st.session_state[key]
-                st.rerun()
+        if st.button("🗑️ Clear All Fields"):
+            for key in st.session_state.keys():
+                if key.startswith('specs'):
+                    del st.session_state[key]
+            st.rerun()
 
     # Display results if available
     if hasattr(st.session_state, 'results') and st.session_state.results:
         results = st.session_state.results
-        
+
         st.header("🎯 Final Results")
-        
+
         # Main results cards
         col1, col2, col3 = st.columns(3)
-        
+
         with col1:
             st.metric(
                 "Total Weight in Air",
                 f"{results['total_weight_air_kg_per_m']:.3f} kg/m",
                 delta=None
             )
-        
+
         with col2:
             st.metric(
                 "Total Weight in Seawater",
                 f"{results['total_weight_seawater_kg_per_m']:.3f} kg/m",
                 delta=None
             )
-        
+
         with col3:
             buoyancy = results['total_weight_air_kg_per_m'] - results['total_weight_seawater_kg_per_m']
             st.metric(
@@ -759,24 +758,24 @@ def main():
         # Technical details
         st.subheader("🔧 Technical Details")
         layup = results['power_core']['layup_geometry']
-        
+
         tech_col1, tech_col2, tech_col3, tech_col4 = st.columns(4)
-        
+
         with tech_col1:
             st.metric("Cabling Factor", f"{layup['cabling_factor']:.5f}")
-        
+
         with tech_col2:
             st.metric("Layup Angle", f"{layup['layup_angle_deg']:.2f}°")
-        
+
         with tech_col3:
             st.metric("Core Density", f"{results['power_core']['overall_density_kg_per_m3']:.0f} kg/m³")
-        
+
         with tech_col4:
             st.metric("Armor Fill Factor", f"{results['armor']['fill_factor_percent']:.1f}%")
 
         # Detailed breakdown
         st.subheader("📋 Detailed Weight Breakdown")
-        
+
         breakdown_data = {
             "Component": [
                 "Power Core (single)",
@@ -812,25 +811,25 @@ def main():
                 results['total_weight_seawater_kg_per_m']
             ]
         }
-        
+
         df_breakdown = pd.DataFrame(breakdown_data)
-        
+
         # Style the dataframe
         def highlight_total(row):
             if row.name == len(df_breakdown) - 1:  # Last row (TOTAL)
                 return ['background-color: #e6f3ff; font-weight: bold'] * len(row)
             return [''] * len(row)
-        
+
         styled_df = df_breakdown.style.apply(highlight_total, axis=1).format({
             'Weight in Air (kg/m)': '{:.3f}',
             'Weight in Seawater (kg/m)': '{:.3f}'
         })
-        
+
         st.dataframe(styled_df, use_container_width=True)
 
         # Power core component breakdown
         st.subheader("🔌 Power Core Component Breakdown")
-        
+
         core_components = results['power_core']['component_weights']
         core_data = {
             "Component": [
@@ -856,15 +855,15 @@ def main():
                 core_components['pe_sheath']
             ]
         }
-        
+
         df_core = pd.DataFrame(core_data)
         st.dataframe(df_core.style.format({'Weight (kg/m)': '{:.3f}'}), use_container_width=True)
 
         # Export functionality
         st.subheader("📤 Export Results")
-        
+
         col1, col2 = st.columns(2)
-        
+
         with col1:
             # Prepare export data
             export_data = {
@@ -880,15 +879,15 @@ def main():
                 },
                 "Detailed Breakdown": breakdown_data
             }
-            
+
             if st.download_button(
-                label="📊 Download Results (CSV)",
-                data=df_breakdown.to_csv(index=False),
-                file_name="cable_weight_results.csv",
-                mime="text/csv"
+                    label="📊 Download Results (CSV)",
+                    data=df_breakdown.to_csv(index=False),
+                    file_name="cable_weight_results.csv",
+                    mime="text/csv"
             ):
                 st.success("Results exported successfully!")
-        
+
         with col2:
             if st.button("🖨️ Print Summary"):
                 if hasattr(st.session_state, 'calculator'):
