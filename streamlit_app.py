@@ -817,7 +817,7 @@ def main():
         # Style the dataframe
         def highlight_total(row):
             if row.name == len(df_breakdown) - 1:  # Last row (TOTAL)
-                return ['background-color: #e6f3ff; font-weight: bold'] * len(row)
+                return ['background-color: #FF7F27; font-weight: bold'] * len(row)
             return [''] * len(row)
 
         styled_df = df_breakdown.style.apply(highlight_total, axis=1).format({
